@@ -9,41 +9,48 @@ import IconButton from '@material-ui/core/IconButton';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
 
-
 class Navbar extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       format: 'hex',
       open: false
-    }
+    };
     this.handleFormatChange = this.handleFormatChange.bind(this);
     this.closeSnackBar = this.closeSnackBar.bind(this);
   }
 
   handleFormatChange(ev) {
-    this.setState({format: ev.target.value, open: true});
-    this.props.handleChange(ev.target.value)
+    this.setState({ format: ev.target.value, open: true });
+    this.props.handleChange(ev.target.value);
   }
 
   closeSnackBar() {
-    this.setState({open: false});
+    this.setState({ open: false });
   }
 
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showingAllColors } = this.props;
     const { format } = this.state;
     return (
       <header className="navbar">
         <div className="logo">
           <Link to="/">reactcolorpicker</Link>
         </div>
-        <div className="slider-container">
-          <span>Level: {level}</span>
-          <div className="slider">
-            <Slider defaultValue={level} min={100} max={900} step={100} onAfterChange={changeLevel}/>
+        {showingAllColors && (
+          <div className="slider-container">
+            <span>Level: {level}</span>
+            <div className="slider">
+              <Slider
+                defaultValue={level}
+                min={100}
+                max={900}
+                step={100}
+                onAfterChange={changeLevel}
+              />
+            </div>
           </div>
-        </div>
+        )}
         <div className="select-container">
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value="hex">HEX - #ffffff</MenuItem>
@@ -52,22 +59,31 @@ class Navbar extends Component {
           </Select>
         </div>
         <Snackbar
-          anchorOrigin={{vertical: "bottom", horizontal: "left"}}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
           open={this.state.open}
           autoHideDuration={3000}
-          message={<span id="message-id">Format Changed to {format.toUpperCase()}!</span>}
+          message={
+            <span id="message-id">
+              Format Changed to {format.toUpperCase()}!
+            </span>
+          }
           ContentProps={{
-            "aria-describedby": "message-id"
+            'aria-describedby': 'message-id'
           }}
           onClose={this.closeSnackBar}
           action={[
-            <IconButton onClick={this.closeSnackBar} color="inherit" key="close" aria-label="close">
+            <IconButton
+              onClick={this.closeSnackBar}
+              color="inherit"
+              key="close"
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
           ]}
         />
       </header>
-    )
+    );
   }
 }
 
