@@ -8,12 +8,21 @@
   margin-bottom: -3.5px;
 }
 
-.colorbox:hover .copy-button{
+.singleColorPalette .colorbox {
+  height: 50%;
+}
+
+.colorbox.go-back {
+  background-color: black;
+}
+
+.colorbox:hover .copy-button {
   opacity: 1;
   transition: 0.5s;
 }
 
-.copy-button {
+.copy-button,
+.back-button {
   width: 100px;
   height: 30px;
   position: absolute;
@@ -23,12 +32,16 @@
   transform: translate(-50%, -50%);
   text-align: center;
   outline: none;
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   font-size: 1rem;
   line-height: 30px;
   color: white;
   text-transform: uppercase;
   border: none;
+  text-decoration: none;
+}
+
+.copy-button {
   opacity: 0;
 }
 
@@ -44,7 +57,7 @@
 }
 
 .see-more {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
   position: absolute;
   border: none;
   right: 0;
