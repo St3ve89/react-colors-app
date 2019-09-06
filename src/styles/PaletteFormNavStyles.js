@@ -16,6 +16,9 @@ const styles = theme => ({
     alignItems: 'center',
     height: '64px'
   },
+  hide: {
+    display: 'none'
+  },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
